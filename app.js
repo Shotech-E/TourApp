@@ -23,72 +23,7 @@ app.set('views', path.join(__dirname, 'views'));
 // Serving static files
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Set security HTTP headers
-// app.use(helmet());
-// const scriptSrcUrls = [
-//   'https://unpkg.com/',
-//   'https://tile.openstreetmap.org',
-//   'https://*.cloudflare.com',
-//   'https://*.stripe.com',
-//   'https://*.mapbox.com',
-//   'https://*.openstreetmap.com',
-// ];
-// const styleSrcUrls = [
-//   'https://unpkg.com/',
-//   'https://tile.openstreetmap.org',
-//   'https://fonts.googleapis.com/',
-// ];
-// const connectSrcUrls = [
-//   'https://unpkg.com',
-//   'https://tile.openstreetmap.org',
-//   'https://*.mapbox.com',
-//   'https://checkout.stripe.com',
-// ];
-// const fontSrcUrls = ['fonts.googleapis.com', 'fonts.gstatic.com'];
- 
-// app.use(
-//   helmet.contentSecurityPolicy({
-//     directives: {
-//       defaultSrc: ["'self'", 'data:', 'blob:'],
-//       baseUri: ["'self'"],
-//       connectSrc: ["'self'", 'blob:', ...connectSrcUrls],
-//       scriptSrc: [
-//         "'self'",
-//         'https:',
-//         'http:',
-//         'blob:',
-//         'https://*.stripe.com',
-//         ...scriptSrcUrls,
-//       ],
-//       styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
-//       workerSrc: ["'self'", 'blob:'],
-//       objectSrc: ["'none'"],
-//       imgSrc: ["'self'", 'blob:', 'data:', 'https:'],
-//       fontSrc: ["'self'", ...fontSrcUrls],
-//       frameSrc: ["'self'", 'https://*.stripe.com'],
-//       childSrc: ["'self'", 'blob:'],
-//     },
-//   })
-// );
-
-app.use(
-  helmet.contentSecurityPolicy({
-    directives: {
-      defaultSrc: ["'self'"],
-      connectSrc: [
-        "'self'",
-        "blob:",
-        "https://unpkg.com",
-        "https://tile.openstreetmap.org",
-        "https://*.mapbox.com",
-        "https://checkout.stripe.com",
-        "ws://localhost:55917"
-      ],
-      // other directives...
-    },
-  })
-);
-
+app.use(helmet());
 
 // Development logging
 if (process.env.NODE_ENV === 'development') {
@@ -149,4 +84,3 @@ app.use(globalErrorHandler);
 
 module.exports = app;
 
-{/* <iframe width="425" height="350" src="https://www.openstreetmap.org/export/embed.html?bbox=3.316411972045899%2C7.132831196050154%2C3.3821582794189458%2C7.179159390611701&amp;layer=mapnik&amp;marker=7.155995881215424%2C3.349285125732422" style="border: 1px solid black"></iframe><br/><small><a href="https://www.openstreetmap.org/?mlat=7.15600&amp;mlon=3.34929#map=14/7.15600/3.34929">View Larger Map</a></small> */}
